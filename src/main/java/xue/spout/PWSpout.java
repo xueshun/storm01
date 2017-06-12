@@ -47,11 +47,11 @@ public class PWSpout extends BaseRichSpout{
 		//随机发送一个单词
 		final Random r = new Random();
 		int num = r.nextInt(5);
-		try {
+		/*try {
 			Thread.sleep(500);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 		this.collector.emit(new Values(map.get(num)));
 	}
 

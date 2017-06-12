@@ -1,11 +1,12 @@
 package xue.topology;
 
 import backtype.storm.Config;
-import backtype.storm.LocalCluster;
+import backtype.storm.StormSubmitter;
 import backtype.storm.topology.TopologyBuilder;
 import xue.bolt.PrintBolt;
 import xue.bolt.WriteBolt;
 import xue.spout.PWSpout;
+
 
 public class PWTopology01 {
 	
@@ -23,10 +24,13 @@ public class PWTopology01 {
 		builder.setBolt("write-bolt", new WriteBolt()).shuffleGrouping("print-bolt");
 		
 		//本地模式
-		LocalCluster cluster = new LocalCluster();
+		/*LocalCluster cluster = new LocalCluster();
 		cluster.submitTopology("top1", cfg, builder.createTopology());
 		Thread.sleep(10000);
 		cluster.killTopology("top1");
-		cluster.shutdown();
+		cluster.shutdown();*/
+		
+		//集群模式
+		StormSubmitter.submitTopology("top1", cfg, builder.createTopology());
 	}
 }
